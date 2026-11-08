@@ -69,4 +69,4 @@ python -m venv .venv
 ## Subject to change
 
 [This toolbox repository](https://github.com/aerth/orchard-tools) might change, and tool scripts might be added or removed.
-Clone add tool scripts to make your own stable toolbox, with tools for your specific workflows.
+Clone and write tool scripts to make your own stable toolbox, with tools for your specific workflows.
