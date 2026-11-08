@@ -29,8 +29,7 @@ The agent should start calling the [sqlite_select](./toolboxes/sqlite_select.bas
 ```json
 {"id":"call_dazemwoy","index":0,"type":"function","function":{"name":"sqlite_select","arguments":"{\"db_path\":\"/tmp/chat.db\",\"query\":\"PRAGMA table_info(chat_messages);\"}"}}
 ...
-{"id":"call_mj50318r","index":0,"type":"function","function":{"name":"sqlite_select","arguments":"{\"db_pa
-th\":\"/tmp/chat.db\",\"query\":\"SELECT content FROM chat_messages ORDER BY created_at ASC LIMIT 1;\"}"}}
+{"id":"call_mj50318r","index":0,"type":"function","function":{"name":"sqlite_select","arguments":"{\"db_path\":\"/tmp/chat.db\",\"query\":\"SELECT content FROM chat_messages ORDER BY created_at ASC LIMIT 1;\"}"}}
 
 ```
 
