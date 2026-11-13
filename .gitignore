@@ -1,4 +1,8 @@
 .env
+.venv
+venv
 *.db
 tmp
 test.txt
+data
+private
