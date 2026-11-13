@@ -28,7 +28,9 @@ The agent should start calling the [sqlite_select](./toolboxes/sqlite_select.bas
 
 ```json
 {"id":"call_dazemwoy","index":0,"type":"function","function":{"name":"sqlite_select","arguments":"{\"db_path\":\"/tmp/chat.db\",\"query\":\"PRAGMA table_info(chat_messages);\"}"}}
-...
+```
+
+```json
 {"id":"call_mj50318r","index":0,"type":"function","function":{"name":"sqlite_select","arguments":"{\"db_path\":\"/tmp/chat.db\",\"query\":\"SELECT content FROM chat_messages ORDER BY created_at ASC LIMIT 1;\"}"}}
 
 ```
@@ -54,6 +56,8 @@ These are parsed at startup, for toolcall args (object/map) to be parsed as posi
 ## python tools
 
 Some tools you might want to implement in python for whatever reason.
+The python scripts must have the spec comment lines like the bash scripts.
+
 After cloning this repo, enter the dir and initialize a virtual env at .venv
 
 ```bash
