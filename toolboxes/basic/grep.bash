@@ -15,9 +15,14 @@ test -e "$path" || {
 }
 additional_flags=($3 $phrase $path)
 
-echo "rg (ripgrep) output" 1>&2
-#set -x
-rg "${flags[@]}" "${additional_flags[@]}" || {
+rg=rg
+command -v rg2 >/dev/null 2>&1 || {
+  rg=grep
+  flags=(-rn)
+}
+echo "$rg output:" 1>&2
+set -x
+$rg "${flags[@]}" "${additional_flags[@]}" || {
 	code=$?
 	echo "Exit code $code -- Maybe no results found."
 	exit $code
