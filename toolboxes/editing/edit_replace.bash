@@ -162,12 +162,15 @@ if ! chmod --reference="$target" -- "$tmp"; then
 fi
 
 PATCH_ID=$(uuidgen) || exit 2
+# show as nice markdown
+echo "Review edit:"
+echo
+echo '```diff'
 diff -u "${target}" "${tmp}" | tee ${output_dir}/${PATCH_ID}.diff
-echo Patch file created. The file is still not modified. To proceed, use apply_patch_id to apply it cleanly.
-echo PATCH_ID=${PATCH_ID}
-#if ! mv -f -- "$tmp" "$target"; then
-#  echo "Error: could not replace file" >&2
-#  exit 1
-#fi
-
-#echo "Updated $target"
+echo
+echo '```'
+echo
+echo "PATCH_ID=${PATCH_ID}"
+echo "Patch file created but has not yet been applied. The file is still not modified."
+echo "To apply the patch to the file, use apply_patch_id to apply it cleanly, otherwise make a new edit."
+echo "Review the above diff that was created. Only apply if it targets the exact change with no un-intended deletions."
