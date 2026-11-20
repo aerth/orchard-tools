@@ -6,7 +6,11 @@
 title="${1:-No Title Given}"
 message="${2:-No Message Given}"
 
-notify-send "$title" "$message"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    osascript -e "display notification \"$message\" with title \"$title\""
+else
+    notify-send "$title" "$message"
+fi
 
 echo "Notification sent: title='$title' message='$message'"
 
