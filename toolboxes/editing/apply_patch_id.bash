@@ -31,6 +31,7 @@ fi
 # -f forces the patch if there are minor conflicts
 if patch -p1 "$filename"<"$DIFF_FILE"; then
     echo "Successfully applied patch $patch_id to $filename"
+	mv "${DIFF_FILE}"{,.applied}
     exit 0
 else
     echo "Error: Failed to apply patch."
