@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -ue
 # Description: Read file text (with line numbers, uses bat)
 # Param: path - Path to file to read [string] [required]
 # Param: line_range - Lines to read ("30:40" or ":40" or "40:") [string] [optional]
@@ -7,6 +6,7 @@ if [[ $# -lt 1 || -z "$1" ]]; then
 	echo "Error: missing 'path' argument" >&2
 	exit 1
 fi
+set -ue
 rel_path="$1"
 line_range="${2:-}"
 ## check path is ok and then run bat
