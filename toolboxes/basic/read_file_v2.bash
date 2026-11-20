@@ -48,6 +48,17 @@ if [[ "$allowed" != true ]]; then
 	echo "Error: Path traversal detected" >&2
 	exit 5
 fi
+
+test -e "${rel_path}" || {
+  echo "There is no file at that path."
+  base=$(basename "${rel_path}")
+  find . \( -path "*/.git" -o -path "*/bin" -o -path "*/tmp" -o -path "*/private" \) -prune -o \( -type f -name "$base" -print \) \
+  | grep -n . && \
+  echo 'Try one of the above paths.' || {
+	echo "There is no files named ${base@Q} in the current directory or any subdirectories."
+  }
+  exit 0
+}
 echo -n "Contents of file ${rel_path@Q} (with line numbers)"
 if [[ -n "$line_range" ]]; then
 	args+=(-r "$line_range")
