@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Description: Create new file, must not exist.
+# Description: Create new text file.
 # Param: path - File path to create [string] [required]
 # Param: new_text - Exact file text [string] [required]
 
@@ -23,7 +23,7 @@ base="$(pwd -P)" || {
 }
 parent="$(dirname "$base")"
 
-if ! target="$(realpath -e -- "$rel_path")"; then
+if ! target="$(realpath -- "$rel_path")"; then
   echo "Error: file does not exist or cannot be resolved" >&2
   exit 1
 fi
@@ -75,13 +75,8 @@ if ! printf '%s' "$new_text" > "$tmp"; then
   exit 1
 fi
 
-if ! chmod --reference="$target" -- "$tmp"; then
-  echo "Error: could not preserve file permissions" >&2
-  exit 1
-fi
-
 if ! mv -f -- "$tmp" "$target"; then
-  echo "Error: could not replace file" >&2
+  echo "Error: could not relocate file" >&2
   exit 1
 fi
 
