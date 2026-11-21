@@ -4,16 +4,39 @@ Collection of tools for [Orchard](https://github.com/aerth/orchard).
 
 Some, such as [web_search](./toolboxes/web/web_search.bash) and [scrape_website](./toolboxes/web/scrape_website.bash), require environmental variables to be placed in a .env file.
 
+Create a `${ORCHARD_TOOLS}/.env` file that contains BRAVE_API_KEY.
+
+You can move some tools to ./disabled/, which will be ignored by Orchard.
+
 Others might require programs to be installed, such as `sqlite` or `bat`.
 
 ## install and use
 
-First, get orchard interface, such as [orchard-tui](https://github.com/aerth/orchard-tui).
+First, get orchard interface, such as [orchard-tui](https://github.com/aerth/orchard-tui) then clone [this repo](https://github.com/aerth/orchard-tools) to `~/src/otools`.
 
-Set the ORCHARD_TOOLS environmental variable to the path where your tools live.
 
-Create a `${ORCHARD_TOOLS}/.env` file that contains BRAVE_API_KEY.
-Otherwise you will want to move that tool to ./disabled/
+Set the `ORCHARD_TOOLS` environmental variable to the path where your tools live.
+
+Orchard automatically reads the directory and scans the scripts into "tools", using the description, and parameter descriptions at the top of each script file.
+
+```bash
+# get orchard-tui
+GOBIN=$HOME/bin go install -v github.com/aerth/orchard-tui@latest
+# clone this starter repo
+git clone https://github.com/aerth/orchard-tools ~/src/otools
+```
+
+If you want, run with only a subset of tools:
+
+```bash
+export ORCHARD_TOOLS=~/src/otools
+orchard-tui --tool read_file_v2,find_file,grep,edit_replace,apply_patch_id -thread 9
+```
+
+
+## dot env files
+
+
 
 Run orchard-tui using this toolbox, using a database for persistence:
 
@@ -38,6 +61,10 @@ The agent should start calling the [sqlite_select](./toolboxes/sqlite_select.bas
 Bot: _The first message in the database was: "Read /tmp/chat.db and tell me what was the first message in the database?"_
 
 (true!)
+
+## runtime customization
+
+You can put a NON-EMPTY `.env` file in each of the toolbox inner-directories. This will isolate each toolbox's API secrets or other variables.
 
 ## adding tools
 
