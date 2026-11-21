@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Description: Create new file or replace existing.
-# Param: path - File path to edit [string] [required]
+# Description: Create new file, must not exist.
+# Param: path - File path to create [string] [required]
 # Param: new_text - Exact file text [string] [required]
 
 set -u
@@ -52,8 +52,8 @@ if [[ "$allowed" != true ]]; then
   exit 1
 fi
 
-if [[ -e "$target" ]] && [[ ! -f "$target" ]]; then
-  echo "Error: target must be a regular file" >&2
+if [[ -e "$target" ]]; then
+  echo "Error: target must NOT exist" >&2
   exit 1
 fi
 
@@ -85,4 +85,4 @@ if ! mv -f -- "$tmp" "$target"; then
   exit 1
 fi
 
-echo "Updated $target"
+echo "Created $target"
