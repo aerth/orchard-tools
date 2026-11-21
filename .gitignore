@@ -6,3 +6,6 @@ tmp
 test.txt
 data
 private
+node_modules
+package.json
+package-lock.json
